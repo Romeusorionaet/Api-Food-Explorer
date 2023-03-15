@@ -1,7 +1,7 @@
 const {Router} = require("express");
 
-const IngredientsController = require("../controllers/IngredientsController");
-const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+const IngredientsController = require("../Controllers/IngredientsController.js");
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated.js");
 
 const ingredientsRoutes = Router();
 

@@ -2,7 +2,7 @@ const {Router} = require("express");
 
 const requestsRoutes = Router();
 
-const RequestsController = require("../Controllers/RequestsController");
+const RequestsController = require("../Controllers/RequestsController.js");
 
 const requestsController = new RequestsController();
 

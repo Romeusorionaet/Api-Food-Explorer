@@ -4,9 +4,9 @@ const uploadConfig = require("../configs/upload");
 
 const platesRoutes = Router();
 
-const PlatesImagemController = require("../controllers/PlatesImagemController");
-const PlatesController = require("../controllers/PlatesController");
-const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+const PlatesImagemController = require("../Controllers/PlatesImagemController.js");
+const PlatesController = require("../Controllers/PlatesController.js");
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated.js");
 
 const platesController = new PlatesController();
 const platesImagemController = new PlatesImagemController();
