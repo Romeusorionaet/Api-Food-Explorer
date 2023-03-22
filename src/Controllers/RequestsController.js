@@ -44,11 +44,13 @@ class RequestsContoller {
     async delete(request, response){
         const user_id = request.params.user_id;
         const plate_id = request.params.id;
-
-        await knex("requests")
-        .where({plate_id})
-        .where({user_id})
-        .delete()
+        
+        if(plate_id){
+            await knex("requests")
+            .where({plate_id})
+            .where({user_id})
+            .delete()
+        }
 
         return response.json()
     }
