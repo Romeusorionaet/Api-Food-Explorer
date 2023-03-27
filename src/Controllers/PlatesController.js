@@ -21,7 +21,8 @@ class PlatesController{
             description,
             category,
             price,
-            user_id
+            user_id,
+            ingredients
         });
       
         const ingredientsInsert = ingredients.map(name => {
@@ -65,32 +66,25 @@ class PlatesController{
     }
 
     async index(request, response){
-        const { title, ingredients } = request.query;
+        const { title} = request.query;
        
         let plates
         
         if(title){
-            //a busca deu 50% certo, apenas com erro de quando existir dois prato com nomes parecidos por exemplo
-            //feijoada e feijoada edit, ira me retonar apenas o feijodada edit que é o ultimo cadastrado e
-            // isso sempre que pesquiso, ou seja. Nuca irá aparecer o prato feijoada.
-            //precisa adiantar outras coisas pois creio que aqui seja apenas questão de lógica ou
-            //do modo que estou pegando no banco de dados, tenho que ver isso mais na frente.
-            // ingredientsParse.map(item=>{
-                //     plates.push(item.plates_id)
-                // })
-                
                 plates = await knex("plates")
                 .whereLike("plates.title", `%${title}%`)
-                .orderBy('title')
-                
+                .orderBy('title') 
+                plates.length !== 0 ?
+                plates
+                :
+                plates = await knex("plates")
+                .whereLike("plates.ingredients", `%${title}%`)
+
             }else{
                 
                 plates = await knex('plates').orderBy('title')
             }
 
-
-            //console.log(plates)
-            
         return response.json(plates);
     }
     
