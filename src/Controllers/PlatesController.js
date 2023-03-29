@@ -82,10 +82,10 @@ class PlatesController{
 
             }else{
                 
-                plates = await knex('plates').orderBy('title')
+                plates = await knex('plates').orderBy('favorited')
             }
 
-        return response.json(plates);
+        return response.json(plates.reverse());
     }
     
     async update(request, response){
