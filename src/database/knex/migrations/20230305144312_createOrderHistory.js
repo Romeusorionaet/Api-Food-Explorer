@@ -4,7 +4,6 @@ exports.up = knex => knex.schema.createTable("orderHistory", table => {
     table.varchar("details");
 
     table.integer("user_id").references("id").inTable("users");
-
     table.timestamp("created_at").default(knex.fn.now());
 })
 

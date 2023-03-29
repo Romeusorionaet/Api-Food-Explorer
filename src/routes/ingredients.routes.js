@@ -9,7 +9,7 @@ const ingredientsController = new IngredientsController();
 
 ingredientsRoutes.use(ensureAuthenticated);
 
-ingredientsRoutes.get("/", ingredientsController.index);
+//ingredientsRoutes.get("/", ingredientsController.index);
 ingredientsRoutes.get("/:id", ingredientsController.show);
 ingredientsRoutes.put("/:id", ingredientsController.update);
 
