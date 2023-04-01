@@ -90,7 +90,7 @@ class PlatesController{
     
     async update(request, response){
         const plate_id = request.params.id;
-        const {title, description, category, price} = request.body;
+        const {title, description, category, price, ingredients} = request.body;
         
         const database = await sqliteConnection();
         const plate = await database.get("SELECT * FROM plates WHERE id = (?)", [plate_id]);
@@ -121,19 +121,22 @@ class PlatesController{
         plate.description = description ?? plate.description;
         plate.category = category ?? plate.category;
         plate.price = price ?? plate.price;
+        plate.ingredients = ingredients ?? plate.ingredients;
 
         await database.run(`
             UPDATE plates SET
             title = ?,
             description = ?,
             category = ?,
-            price = ?
+            price = ?,
+            ingredients = ?
             WHERE id = ?`,
             [
                 plate.title, 
                 plate.description, 
                 plate.category,
                 plate.price, 
+                plate.ingredients, 
                 plate_id
             ]
         );

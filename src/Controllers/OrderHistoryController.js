@@ -3,7 +3,6 @@ const knex = require("../database/knex");
 class OrderHistory {
     async create(request, response){
         const user_id = request.params.id;
-
         const orderHistory = await knex('requests').where({user_id})
 
         let newOrderHistoryDetails = []
