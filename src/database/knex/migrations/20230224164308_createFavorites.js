@@ -1,4 +1,3 @@
-
 exports.up = knex => knex.schema.createTable("favorites", table => {
     table.integer('id');
     table.varchar("title");

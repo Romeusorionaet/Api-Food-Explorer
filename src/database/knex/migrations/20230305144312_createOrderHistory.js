@@ -8,5 +8,3 @@ exports.up = knex => knex.schema.createTable("orderHistory", table => {
 })
 
 exports.down = knex => knex.schema.dropTable("orderHistory");
-
-

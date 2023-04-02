@@ -1,8 +1,7 @@
 const knex = require("../database/knex");
-const sqliteConnection = require("../database/sqlite")
+const sqliteConnection = require("../database/sqlite");
 const AppError = require("..//utils/AppError");
 const DiskStorage = require("../providers/DiskStorageForPlate");
-const store = require("store2");
 
 class PlatesController{
     async create(request, response){
@@ -34,6 +33,7 @@ class PlatesController{
         });
         
         await knex("ingredients").insert(ingredientsInsert);
+
         return response.json().status(200);
     }
 
@@ -54,7 +54,7 @@ class PlatesController{
         const diskStorage = new DiskStorage();
 
         const plate = await knex("plates")
-        .where({id}).first()
+        .where({id}).first();
       
         if(plate.imagem){
             await diskStorage.deleteFile(plate.imagem);
@@ -68,21 +68,21 @@ class PlatesController{
     async index(request, response){
         const { title} = request.query;
        
-        let plates
+        let plates;
         
         if(title){
                 plates = await knex("plates")
                 .whereLike("plates.title", `%${title}%`)
-                .orderBy('title') 
+                .orderBy('title');
+
                 plates.length !== 0 ?
                 plates
                 :
                 plates = await knex("plates")
-                .whereLike("plates.ingredients", `%${title}%`)
+                .whereLike("plates.ingredients", `%${title}%`);
 
             }else{
-                
-                plates = await knex('plates').orderBy('favorited')
+                plates = await knex('plates').orderBy('favorited');
             }
 
         return response.json(plates.reverse());
@@ -96,11 +96,11 @@ class PlatesController{
         const plate = await database.get("SELECT * FROM plates WHERE id = (?)", [plate_id]);
         
         const [saveId] = await knex('favorites')
-        .where({id: plate_id})
+        .where({id: plate_id});
 
         if(saveId){
             await knex('favorites')
-            .where({id: plate_id}).delete()
+            .where({id: plate_id}).delete();
             
             await knex('favorites')
             .insert({
@@ -110,12 +110,12 @@ class PlatesController{
                 description,
                 price,
                 user_id: saveId.user_id
-            })
-        }  
+            });
+        };
 
         if(!plate) {
             throw new AppError("Prato não encontrado");
-        }
+        };
 
         plate.title = title ?? plate.title;
         plate.description = description ?? plate.description;

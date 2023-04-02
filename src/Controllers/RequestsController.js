@@ -15,7 +15,6 @@ class RequestsContoller {
             await knex("requests")
             .where({plate_id})
             .update({amount: amount})
-            //colocar uma alert aq do AppError
         }else{
             await knex("requests")
             .insert({
@@ -27,19 +26,16 @@ class RequestsContoller {
                 plate_id,
                 user_id,
                 imagem: plate.imagem     
-            })
-        }
+            });
+        };
 
-        return response.status(201).json()
+        return response.status(201).json();
     }
     async show(request, response){
-        //pensar em outro nome pq esse requests confundi
-        //preciso filtrar a requisição pq ta sendo pedido tudo no banco sendo que
-        //so estou usando no front o price, title e amount
         const user_id = request.params.id;
-        const requests = await knex("requests").where({user_id})
+        const requests = await knex("requests").where({user_id});
 
-        return response.json(requests)
+        return response.json(requests);
     }
     async delete(request, response){
         const user_id = request.params.user_id;
@@ -48,16 +44,16 @@ class RequestsContoller {
         if(plate_id == 0){
             await knex("requests")
             .where({user_id})
-            .delete()
+            .delete();
 
         }else{
             await knex("requests")
             .where({plate_id})
             .where({user_id})
-            .delete()
-        }
+            .delete();
+        };
 
-        return response.json()
+        return response.json();
     }
 }
 

@@ -10,7 +10,7 @@ class UserController {
 
     if (checkuserExists.length > 0){
       throw new AppError('Este email já está em uso', 401);
-    }
+    };
 
     const hashedPassword = await hash(password, 8);
 
@@ -19,7 +19,7 @@ class UserController {
       email,
       password: hashedPassword,
       admin: false
-    })
+    });
 
     return response.status(200).json();
   }

@@ -41,6 +41,28 @@ class FavoritesController {
         
         response.status(200).json()
     }
+
+    async index(request, response){
+        const {title} = request.query;
+        const user_id = request.params.user_id;
+
+        let plateFavorites;
+
+        if(title){
+            plateFavorites = await knex("favorites")
+            .whereLike("favorites.title", `%${title}%`)
+            .where({user_id})
+            .orderBy('title');
+        }else{
+            plateFavorites = await knex("favorites")
+            .where({user_id})
+            .orderBy('title');
+        }
+        
+
+        return response.json(plateFavorites);
+    }
+    
     async delete(request, response){
         const id = request.params.id;
         const user_id = request.params.user_id;
@@ -48,7 +70,7 @@ class FavoritesController {
         await knex("favorites")
         .where({user_id})
         .where({id})
-        .delete()
+        .delete();
 
         const [plate] = await knex('plates')
         .where({id});
@@ -59,51 +81,8 @@ class FavoritesController {
         .update('favorited', currentValue - 1)
         .where({id});
 
-        return response.json()
+        return response.json();
         
-    }
-    async index(request, response){
-        const {title} = request.query;
-        const user_id = request.params.user_id;
-
-        let plateFavorites
-
-        if(title){
-            plateFavorites = await knex("favorites")
-            .whereLike("favorites.title", `%${title}%`)
-            .where({user_id})
-            .orderBy('title')
-        }else{
-            plateFavorites = await knex("favorites")
-            .where({user_id})
-            .orderBy('title')
-        }
-        
-
-        return response.json(plateFavorites)
-    }
-    async update(request, response){
-        
-        // const plate_id = request.params.id;
-        // const {title, description, category, price} = request.body;
-
-        // const [saveId] = await knex('favorites')
-        // .where({id: plate_id})
-
-        // if(saveId){
-        //     await knex('favorites')
-        //     .where({id: plate_id}).delete()
-            
-        //     await knex('favorites')
-        //     .insert({
-        //         id: plate_id,
-        //         title,
-        //         category,
-        //         description,
-        //         price,
-        //         user_id: saveId.user_id
-        //     })
-        // } 
     }
 }
 

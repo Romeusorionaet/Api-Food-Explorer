@@ -9,7 +9,7 @@ class PlatesImagemController {
         const diskStorage = new DiskStorage();
         
         const plate = await knex("plates")
-        .where(plate_id).first()
+        .where(plate_id).first();
         
         if(!plate){
             throw new AppError("Ação negado.", 401);

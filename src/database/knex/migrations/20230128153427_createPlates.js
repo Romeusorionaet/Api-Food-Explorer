@@ -1,4 +1,3 @@
-
 exports.up = knex => knex.schema.createTable("plates", table => {
     table.increments("id");
     table.varchar("title");
