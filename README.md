@@ -1,13 +1,12 @@
 <h1>API Food Explorer</h1>
 
-> Esta api simula um restaurante com todas as rotas necessária, controlando todo o processo desde criação de usuário até criação de pratos. É uma api CRUD Rest com Node.js e Express
+> This api simulates a restaurant with all the necessary routes, controlling the entire process from user creation to plate creation. It is a CRUD Rest api with Node.js and Express.
 
 <h2>How to use the API</h2>
 
-* Clone this repository and clone this other
-* To start on both:
+* Clone this repository and clone this other: https://github.com/Romeusorionaet/FrontendFood
 
-> npm run dev
+> To start on both: npm run dev
 
 <h2>Tecnology</h2>
 
@@ -21,7 +20,7 @@
 
 <h2>Author</h2>
 
-* Romeu Soares de Souto.
+* Romeu soares de souto.
 
 <h2>Contact</h2>
 
